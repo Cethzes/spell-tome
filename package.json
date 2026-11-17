@@ -1,0 +1,12 @@
+{
+  "name": "spell-tome",
+  "private": true,
+  "scripts": {
+    "setup": "neu update --latest",
+    "start": "neu run",
+    "build": "neu build --embed-resources --release"
+  },
+  "devDependencies": {
+    "@neutralinojs/neu": "^11.8.0"
+  }
+}

@@ -1,0 +1,206 @@
+/* Layout: the leather-bound book is the whole app: it fills a frameless, transparent window. Search and filters live on the Contents page; ribbons jump to levels and close the book. Deliberately one look (night study), so no light/dark split. */
+:root {
+  color-scheme: dark;
+  --desk: #17131c;
+  --desk-hi: #241d2c;
+  --leather: #2e1f15;
+  --leather-hi: #4a3424;
+  --gilt: #c8a35a;
+  --parchment: #eee2c4;
+  --parchment-dk: #d8c59c;
+  --ink: #2a2018;
+  --ink-soft: #5d4c3b;
+  --rubric: #8b2330;
+  --chrome-fg: #e9dcc0;
+  --chrome-dim: #a89a86;
+  /* school sigil inks */
+  --s-Abjuration: #2f5d8a; --s-Conjuration: #8a5a1f; --s-Divination: #4f6f78; --s-Enchantment: #a0306a;
+  --s-Evocation: #b2401f; --s-Illusion: #6a44a0; --s-Necromancy: #3d5a2e; --s-Transmutation: #9a7a12;
+  --f-display: "IM Fell English SC", "IM Fell English", Georgia, serif;
+  --f-italic: "IM Fell English", Georgia, serif;
+  --f-body: "EB Garamond", Garamond, Georgia, serif;
+}
+html, body { height: 100%; margin: 0; background: transparent; }
+body {
+  color: var(--chrome-fg);
+  font-family: var(--f-body);
+  font-size: 17px;
+  padding: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+  user-select: none;
+}
+button, input { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--gilt); outline-offset: 2px; }
+
+/* ---------- search + filters (contents page) ---------- */
+.finder { margin: 10px 0 4px; display: grid; gap: 8px; }
+.finder input {
+  width: 100%; box-sizing: border-box; background: transparent; border: 0; border-bottom: 1px solid var(--ink-soft);
+  padding: 3px 2px; font-size: 1rem; color: var(--ink); user-select: text;
+}
+.finder input::placeholder { color: var(--ink-soft); font-style: italic; }
+.chips { display: flex; flex-wrap: wrap; gap: 5px; }
+.chip {
+  border: 1px solid var(--parchment-dk); background: transparent; border-radius: 2px; cursor: pointer;
+  padding: 0 7px; font-size: .82rem; letter-spacing: .02em; color: var(--ink-soft);
+  display: inline-flex; align-items: center; gap: 5px;
+}
+.chip:hover { color: var(--ink); border-color: var(--ink-soft); }
+.chip[aria-pressed="true"] { color: var(--parchment); background: var(--rubric); border-color: var(--rubric); }
+.chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c, var(--gilt)); }
+.chip.clear { border-style: dashed; }
+
+/* ---------- book ---------- */
+/* .boards is the leather binding behind turn.js's pages (#flip); while the book is shut it clips to the one cover showing */
+.stage { height: 100%; }
+.book-wrap { position: relative; width: calc(100% - 40px); height: 100%; transition: opacity .45s, transform .45s; }
+.book-wrap.closing { opacity: 0; transform: scale(.97); }
+.book { position: relative; height: 100%; cursor: grab; }
+.boards {
+  position: absolute; inset: 0; border-radius: 6px;
+  background:
+    linear-gradient(90deg, transparent 49.3%, #0007 50%, transparent 50.7%),
+    radial-gradient(ellipse at 30% 20%, var(--leather-hi), var(--leather) 70%);
+  box-shadow: 0 6px 14px #000b, inset 0 0 0 2px #0005, inset 0 0 0 5px color-mix(in srgb, var(--gilt) 40%, transparent);
+  transition: clip-path .3s;
+  clip-path: inset(-20px); /* negative so the drop shadow survives */
+}
+.shut-front .boards { clip-path: inset(-20px -20px -20px 50%); }
+.shut-back .boards { clip-path: inset(-20px 50% -20px -20px); }
+#flip { position: absolute; inset: 14px; cursor: auto; touch-action: pan-y; }
+.page { position: relative; overflow: hidden; background: var(--parchment); color: var(--ink); }
+.page.l { border-radius: 3px 0 0 3px; background: linear-gradient(270deg, #0000002e, transparent 8%), var(--parchment); }
+.page.r { border-radius: 0 3px 3px 0; background: linear-gradient(90deg, #0000002e, transparent 8%), var(--parchment); }
+.page::after { /* foxed edge and grain */
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 60%, color-mix(in srgb, var(--parchment-dk) 80%, transparent) 100%);
+}
+.page.cover { /* the boards themselves: aged hide; the front's art is www/cover.svg */
+  display: flex; align-items: center; justify-content: center; cursor: pointer;
+  background: radial-gradient(ellipse at 55% 45%, #46301f, #2e1f15 70%, #160e08 110%);
+}
+.page.cover::after { display: none; }
+.page.cover-front { border-radius: 2px 7px 7px 2px; }
+/* shut: the page block peeks out right and below the front board, over the back board, so it reads as a thick book */
+.shut-front .boards::before, .shut-front .boards::after { content: ""; position: absolute; border-radius: 0 3px 3px 0; }
+.shut-front .boards::before { /* fore-edge */
+  top: 18px; bottom: 5px; right: 4px; width: 11px;
+  background: linear-gradient(90deg, #0007, transparent 4px), repeating-linear-gradient(90deg, #e6dabd 0 1px, #c3ad82 1px 2px);
+}
+.shut-front .boards::after { /* tail edge */
+  left: calc(50% + 6px); right: 4px; bottom: 4px; height: 11px; border-radius: 0 0 3px 3px;
+  background: linear-gradient(180deg, #0007, transparent 4px), repeating-linear-gradient(180deg, #e6dabd 0 1px, #c3ad82 1px 2px);
+}
+.cover-title { text-align: center; font: 400 3.4rem/1.05 var(--f-display); color: var(--ink); }
+.cover-art { position: absolute; inset: 0; }
+.cover-art svg { display: block; width: 100%; height: 100%; }
+
+.inner { position: relative; height: 100%; overflow-y: auto; padding: 38px 44px 46px; z-index: 1; scrollbar-width: thin; }
+.folio { position: absolute; bottom: 14px; left: 0; right: 0; text-align: center; font: italic .85rem var(--f-italic); color: var(--ink-soft); z-index: 2; }
+
+/* ---------- ribbon tabs ---------- */
+.tabs { position: absolute; top: 40px; right: -36px; display: flex; flex-direction: column; gap: 4px; z-index: 1; }
+.tab {
+  width: 36px; min-height: 40px; border: 0; cursor: pointer; padding: 6px 0 6px 6px;
+  border-radius: 0 4px 4px 0; text-align: center;
+  background: var(--tab, var(--rubric)); color: #f6ecd6;
+  font: 400 .95rem var(--f-display); box-shadow: 2px 2px 4px #0006;
+  transform: translateX(-6px); transition: transform .15s;
+}
+.tab:hover, .tab.active { transform: translateX(0); }
+.tab.active { box-shadow: 2px 2px 4px #0006, inset 0 0 0 2px var(--gilt); }
+.tab.close { margin-top: 14px; --tab: #2a1418; color: var(--gilt); }
+.book-wrap:has(.shut-front, .shut-back) .tab:not(.close) { display: none; } /* level ribbons only while open */
+
+/* ---------- page content ---------- */
+.inner h2, .inner h3 { font-family: var(--f-display); font-weight: 400; margin: 0; text-wrap: balance; }
+.orn { text-align: center; color: var(--rubric); letter-spacing: .5em; margin: 14px 0; font-size: .9rem; }
+.title-pg { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; min-height: 100%; gap: 6px; }
+.title-pg h2 { font-size: 2.6rem; color: var(--rubric); line-height: 1.05; }
+.title-pg .sub { font: italic 1.15rem var(--f-italic); color: var(--ink-soft); }
+.title-pg p { max-width: 32ch; line-height: 1.5; margin: 6px 0; }
+.title-pg .count { font-family: var(--f-display); font-size: 1.05rem; }
+
+.toc h2, .sect h2 { font-size: 1.9rem; color: var(--rubric); text-align: center; }
+.sect .kicker { text-align: center; font: italic 1rem var(--f-italic); color: var(--ink-soft); margin-top: 2px; }
+.toc ol { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 4px; }
+.lead {
+  display: flex; align-items: baseline; gap: 6px; width: 100%; border: 0; background: none; padding: 3px 0;
+  cursor: pointer; text-align: left; color: var(--ink); font-size: 1.05rem;
+}
+.lead::after { content: ""; order: 2; flex: 1; border-bottom: 1px dotted var(--ink-soft); transform: translateY(-4px); }
+.lead .pg { order: 3; font-variant-numeric: tabular-nums; color: var(--ink-soft); }
+.lead .n { order: 1; min-width: 0; }
+.lead:hover .n { color: var(--rubric); }
+.toc .lead { font-family: var(--f-display); font-size: 1.15rem; }
+.toc .lead em { font-family: var(--f-body); font-size: .9rem; color: var(--ink-soft); margin-left: 4px; }
+.sect ul { list-style: none; padding: 0; margin: 16px 0 0; columns: 2 13rem; column-gap: 24px; font-size: .95rem; }
+.sect li { break-inside: avoid; }
+.sect .lead { font-size: .95rem; padding: 1px 0; }
+.sig { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--c); margin-right: 4px; transform: translateY(-1px); flex: none; }
+.mk { font-size: .72rem; color: var(--rubric); font-family: var(--f-display); margin-left: 3px; }
+.star { color: var(--rubric); }
+
+.spell .lvl { font: italic 1rem var(--f-italic); color: var(--ink-soft); }
+.spell h3 { font-size: 2rem; line-height: 1.05; color: var(--ink); margin: 2px 0 10px; }
+.spell h3::first-letter { color: var(--rubric); font-size: 1.25em; }
+.stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px 18px; margin: 0; padding: 12px 0; border-block: 1px solid var(--parchment-dk); }
+.stats div { min-width: 0; }
+.stats dt { font-family: var(--f-display); font-size: .8rem; letter-spacing: .08em; color: var(--rubric); }
+.stats dd { margin: 0; font-size: 1rem; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0; }
+.tag { border: 1px solid currentColor; border-radius: 2px; padding: 0 7px; font-size: .82rem; letter-spacing: .04em; font-family: var(--f-display); }
+.tag.school { color: var(--c); }
+.tag.c { color: var(--ink-soft); }
+.tag.r { color: var(--s-Divination); }
+.desc { line-height: 1.55; font-size: 1.07rem; max-width: 60ch; margin: 6px 0 0; }
+.desc::first-letter { font-family: var(--f-display); font-size: 2.6em; float: left; line-height: .8; margin: 6px 6px 0 0; color: var(--c); }
+.prep {
+  margin-top: 18px; border: 1px solid var(--ink-soft); background: transparent; color: var(--ink); cursor: pointer;
+  padding: 4px 12px; border-radius: 2px; font-family: var(--f-display); font-size: .9rem; letter-spacing: .04em;
+}
+.prep[aria-pressed="true"] { background: var(--rubric); border-color: var(--rubric); color: var(--parchment); }
+.blank { display: flex; align-items: center; justify-content: center; min-height: 100%; color: var(--parchment-dk); font-size: 3rem; font-family: var(--f-display); }
+.empty { text-align: center; padding-top: 30%; font-style: italic; color: var(--ink-soft); }
+
+/* ---------- ledger pages ---------- */
+.sheet h2 { font-size: 1.9rem; color: var(--rubric); text-align: center; }
+.sheet .kicker { text-align: center; font: italic 1rem var(--f-italic); color: var(--ink-soft); margin-top: 2px; }
+.sheet .kicker.over { color: var(--rubric); }
+.sheet h4 { font-family: var(--f-display); font-weight: 400; font-size: 1.05rem; color: var(--rubric); margin: 14px 0 6px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.sheet h4 small { font: italic .9rem var(--f-italic); color: var(--ink-soft); }
+.row { display: grid; grid-template-columns: repeat(auto-fit, minmax(84px, 1fr)); gap: 8px 14px; margin: 6px 0; }
+.fld { display: flex; flex-direction: column; min-width: 0; }
+.fld span, .stat span { font-family: var(--f-display); font-size: .75rem; letter-spacing: .08em; color: var(--ink-soft); }
+.sheet input, .sheet select {
+  width: 100%; min-width: 0; background: transparent; border: 0; border-bottom: 1px solid var(--ink-soft);
+  color: var(--ink); font-family: var(--f-body); font-size: 1.1rem; padding: 1px 2px; font-variant-numeric: tabular-nums;
+}
+.sheet select option { color: #222; }
+.fld.name input { font-family: var(--f-display); font-size: 1.5rem; text-align: center; }
+.derived { border-block: 1px solid var(--parchment-dk); padding: 8px 0; }
+.stat { display: flex; flex-direction: column; align-items: center; }
+.stat b { font: 400 1.6rem/1.1 var(--f-display); color: var(--ink); font-variant-numeric: tabular-nums; }
+.hpline { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.hpline input { width: 7ch; flex: none; }
+.hpline .prep, .acts .prep { margin-top: 0; }
+.acts { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+.pips { display: inline-flex; flex-wrap: wrap; gap: 5px; }
+.pip { width: 18px; height: 18px; padding: 0; border-radius: 50%; border: 1.5px solid var(--ink-soft); background: transparent; cursor: pointer; }
+.pip.on { background: var(--rubric); border-color: var(--rubric); }
+.pip.ok.on { background: var(--s-Necromancy); border-color: var(--s-Necromancy); }
+.ds { display: flex; align-items: center; gap: 8px 12px; flex-wrap: wrap; font-size: .95rem; }
+.slotrow { display: grid; grid-template-columns: 3.2em 1fr auto; align-items: center; gap: 10px; padding: 5px 0; border-bottom: 1px dotted var(--parchment-dk); }
+.slotrow span { font-family: var(--f-display); color: var(--rubric); }
+.slotrow em { color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+.note { font-size: .95rem; line-height: 1.45; margin: 4px 0; color: var(--ink-soft); }
+.feats { list-style: none; padding: 0; margin: 0; font-size: .95rem; line-height: 1.4; display: grid; gap: 3px; }
+.feats b { font-family: var(--f-display); color: var(--rubric); display: inline-block; min-width: 2.2em; }
+.prepd ul { list-style: none; padding: 0; margin: 0; }
+.prepd li { display: flex; align-items: baseline; gap: 6px; }
+.prepd .lead { flex: 1; min-width: 0; }
+.x { border: 0; background: none; color: var(--ink-soft); cursor: pointer; font-size: 1.1rem; padding: 0 4px; }
+.x:hover { color: var(--rubric); }
+
+@media (prefers-reduced-motion: reduce) { .book-wrap, .boards { transition: none; } }

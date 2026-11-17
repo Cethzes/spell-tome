@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 530 680" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Liber Arcanorum: a worn dark-brown leather cover tooled with a border and a five-pointed star">
+  <!-- Front cover art. Layers: hide, wear, grain, edge bevel, hinge groove, then the tooling (border + star),
+       stamped three times: shadow, highlight, faded gilt. Change the tooling once in #tooling. -->
+  <defs>
+    <filter id="wear" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".022 .03" numOctaves="4" seed="21"/>
+      <feColorMatrix values="0 0 0 0 .55  0 0 0 0 .42  0 0 0 0 .32  2.2 0 0 0 -1.05"/></filter>
+    <filter id="grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="4"/>
+      <feColorMatrix values="0 0 0 0 .08  0 0 0 0 .05  0 0 0 0 .03  1.1 0 0 0 -.4"/></filter>
+    <radialGradient id="vignette" cx="55%" cy="45%" r="75%">
+      <stop offset=".55" stop-color="#120a05" stop-opacity="0"/><stop offset="1" stop-color="#120a05" stop-opacity=".55"/></radialGradient>
+    <linearGradient id="bevelL" x1="0" x2="1"><stop offset="0" stop-color="#0d0704" stop-opacity=".7"/><stop offset="1" stop-color="#0d0704" stop-opacity="0"/></linearGradient>
+    <linearGradient id="bevelR" x1="1" x2="0"><stop offset="0" stop-color="#0d0704" stop-opacity=".55"/><stop offset="1" stop-color="#0d0704" stop-opacity="0"/></linearGradient>
+    <linearGradient id="bevelT" y1="0" y2="1"><stop offset="0" stop-color="#a5815e" stop-opacity=".35"/><stop offset="1" stop-color="#a5815e" stop-opacity="0"/></linearGradient>
+    <linearGradient id="bevelB" y1="1" y2="0"><stop offset="0" stop-color="#0d0704" stop-opacity=".6"/><stop offset="1" stop-color="#0d0704" stop-opacity="0"/></linearGradient>
+    <g id="tooling" fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <rect x="54" y="38" width="438" height="604" rx="2"/>
+    <rect x="59" y="43" width="428" height="594" rx="2"/>
+    <rect x="64.5" y="48.5" width="417" height="583" stroke-dasharray="0 6" stroke-width="2.6"/>
+    <rect x="70" y="54" width="406" height="572" rx="1"/>
+    <g transform="translate(84 68) scale(1 1)">
+      <path d="M0 -9 L9 0 L0 9 L-9 0Z"/><path d="M12 0 q10 -10 20 0 M0 12 q-10 10 0 20"/>
+      <circle cx="0" cy="0" r="2.2" fill="currentColor"/></g><g transform="translate(462 68) scale(-1 1)">
+      <path d="M0 -9 L9 0 L0 9 L-9 0Z"/><path d="M12 0 q10 -10 20 0 M0 12 q-10 10 0 20"/>
+      <circle cx="0" cy="0" r="2.2" fill="currentColor"/></g><g transform="translate(84 612) scale(1 -1)">
+      <path d="M0 -9 L9 0 L0 9 L-9 0Z"/><path d="M12 0 q10 -10 20 0 M0 12 q-10 10 0 20"/>
+      <circle cx="0" cy="0" r="2.2" fill="currentColor"/></g><g transform="translate(462 612) scale(-1 -1)">
+      <path d="M0 -9 L9 0 L0 9 L-9 0Z"/><path d="M12 0 q10 -10 20 0 M0 12 q-10 10 0 20"/>
+      <circle cx="0" cy="0" r="2.2" fill="currentColor"/></g>
+    <g transform="translate(273 66) rotate(0)"><path d="M-14 0 H-5 M5 0 H14 M0 -5 L5 0 L0 5 L-5 0Z"/></g><g transform="translate(273 614) rotate(0)"><path d="M-14 0 H-5 M5 0 H14 M0 -5 L5 0 L0 5 L-5 0Z"/></g><g transform="translate(82 340) rotate(90)"><path d="M-14 0 H-5 M5 0 H14 M0 -5 L5 0 L0 5 L-5 0Z"/></g><g transform="translate(464 340) rotate(90)"><path d="M-14 0 H-5 M5 0 H14 M0 -5 L5 0 L0 5 L-5 0Z"/></g>
+    <circle cx="273" cy="340" r="104"/>
+    <circle cx="273" cy="340" r="97" stroke-dasharray="0 6" stroke-width="2.6"/>
+    <path d="M273 254 L292.4 313.3 L354.8 313.4 L304.4 350.2 L323.5 409.6 L273 373 L222.5 409.6 L241.6 350.2 L191.2 313.4 L253.6 313.3Z"/>
+    <path d="M273 266 L289.6 317.1 L343.4 317.1 L299.9 348.7 L316.5 399.9 L273 368.3 L229.5 399.9 L246.1 348.7 L202.6 317.1 L256.4 317.1Z"/>
+    </g>
+  </defs>
+  <rect id="hide" width="530" height="680" fill="#3a271a"/>
+  <rect width="530" height="680" filter="url(#wear)" opacity=".2"/>
+  <rect width="530" height="680" filter="url(#grain)" opacity=".6"/>
+  <rect width="530" height="680" fill="url(#vignette)"/>
+  <!-- bevelled board edges: light catches the top, shadow falls right and bottom -->
+  <rect width="530" height="10" fill="url(#bevelT)"/>
+  <rect y="668" width="530" height="12" fill="url(#bevelB)"/>
+  <rect x="518" width="12" height="680" fill="url(#bevelR)"/>
+  <rect width="530" height="680" fill="none" stroke="#7a5a40" stroke-opacity=".35" stroke-width="2"/>
+  <!-- hinge groove where the board meets the spine -->
+  <rect width="26" height="680" fill="url(#bevelL)"/>
+  <rect x="24" width="3" height="680" fill="#0d0704" opacity=".75"/>
+  <rect x="27.5" width="1.2" height="680" fill="#8a6748" opacity=".45"/>
+  <!-- tooling stamped into the leather -->
+  <use href="#tooling" stroke="#120a05" stroke-width="2.2" transform="translate(.9 1.1)" color="#120a05" opacity=".8"/>
+  <use href="#tooling" stroke="#7d5c41" stroke-width="1.6" transform="translate(-.7 -.7)" color="#7d5c41" opacity=".55"/>
+  <use href="#tooling" stroke="#b08d55" stroke-width="1.5" color="#b08d55" opacity=".6"/>
+</svg>

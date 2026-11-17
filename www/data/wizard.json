@@ -1,0 +1,179 @@
+{
+  "class": "Wizard",
+  "hitDie": 6,
+  "spellcastingAbility": "int",
+  "progression": [
+    {
+      "level": 1,
+      "cantrips": 3,
+      "preparedSpells": 4,
+      "spellSlots": [2]
+    },
+    {
+      "level": 2,
+      "cantrips": 3,
+      "preparedSpells": 5,
+      "spellSlots": [3]
+    },
+    {
+      "level": 3,
+      "cantrips": 3,
+      "preparedSpells": 6,
+      "spellSlots": [4, 2]
+    },
+    {
+      "level": 4,
+      "cantrips": 4,
+      "preparedSpells": 7,
+      "spellSlots": [4, 3]
+    },
+    {
+      "level": 5,
+      "cantrips": 4,
+      "preparedSpells": 9,
+      "spellSlots": [4, 3, 2]
+    },
+    {
+      "level": 6,
+      "cantrips": 4,
+      "preparedSpells": 10,
+      "spellSlots": [4, 3, 3]
+    },
+    {
+      "level": 7,
+      "cantrips": 4,
+      "preparedSpells": 11,
+      "spellSlots": [4, 3, 3, 1]
+    },
+    {
+      "level": 8,
+      "cantrips": 4,
+      "preparedSpells": 12,
+      "spellSlots": [4, 3, 3, 2]
+    },
+    {
+      "level": 9,
+      "cantrips": 4,
+      "preparedSpells": 14,
+      "spellSlots": [4, 3, 3, 3, 1]
+    },
+    {
+      "level": 10,
+      "cantrips": 5,
+      "preparedSpells": 15,
+      "spellSlots": [4, 3, 3, 3, 2]
+    },
+    {
+      "level": 11,
+      "cantrips": 5,
+      "preparedSpells": 16,
+      "spellSlots": [4, 3, 3, 3, 2, 1]
+    },
+    {
+      "level": 12,
+      "cantrips": 5,
+      "preparedSpells": 16,
+      "spellSlots": [4, 3, 3, 3, 2, 1]
+    },
+    {
+      "level": 13,
+      "cantrips": 5,
+      "preparedSpells": 17,
+      "spellSlots": [4, 3, 3, 3, 2, 1, 1]
+    },
+    {
+      "level": 14,
+      "cantrips": 5,
+      "preparedSpells": 18,
+      "spellSlots": [4, 3, 3, 3, 2, 1, 1]
+    },
+    {
+      "level": 15,
+      "cantrips": 5,
+      "preparedSpells": 19,
+      "spellSlots": [4, 3, 3, 3, 2, 1, 1, 1]
+    },
+    {
+      "level": 16,
+      "cantrips": 5,
+      "preparedSpells": 21,
+      "spellSlots": [4, 3, 3, 3, 2, 1, 1, 1]
+    },
+    {
+      "level": 17,
+      "cantrips": 5,
+      "preparedSpells": 22,
+      "spellSlots": [4, 3, 3, 3, 2, 1, 1, 1, 1]
+    },
+    {
+      "level": 18,
+      "cantrips": 5,
+      "preparedSpells": 23,
+      "spellSlots": [4, 3, 3, 3, 3, 1, 1, 1, 1]
+    },
+    {
+      "level": 19,
+      "cantrips": 5,
+      "preparedSpells": 24,
+      "spellSlots": [4, 3, 3, 3, 3, 2, 1, 1, 1]
+    },
+    {
+      "level": 20,
+      "cantrips": 5,
+      "preparedSpells": 25,
+      "spellSlots": [4, 3, 3, 3, 3, 2, 2, 1, 1]
+    }
+  ],
+  "features": [
+    {
+      "level": 1,
+      "name": "Spellcasting",
+      "text": "Prepare spells from your spellbook; Intelligence is your spellcasting ability."
+    },
+    {
+      "level": 1,
+      "name": "Ritual Adept",
+      "text": "Cast any Ritual spell in your spellbook as a Ritual without preparing it."
+    },
+    {
+      "level": 1,
+      "name": "Arcane Recovery",
+      "text": "Once per Long Rest, after a Short Rest, regain expended slots of combined level up to half your wizard level (rounded up), none 6th or higher."
+    },
+    {
+      "level": 2,
+      "name": "Scholar",
+      "text": "Expertise in one knowledge skill."
+    },
+    {
+      "level": 3,
+      "name": "Wizard Subclass",
+      "text": "Further subclass features at levels 6, 10 and 14."
+    },
+    {
+      "level": 4,
+      "name": "Ability Score Improvement",
+      "text": "Again at levels 8, 12 and 16."
+    },
+    {
+      "level": 5,
+      "name": "Memorize Spell",
+      "text": "After a Short Rest, swap one prepared spell for another in your spellbook."
+    },
+    {
+      "level": 18,
+      "name": "Spell Mastery",
+      "text": "Cast one chosen 1st-level and one 2nd-level spell at will."
+    },
+    {
+      "level": 19,
+      "name": "Epic Boon",
+      "text": "Gain an Epic Boon feat."
+    },
+    {
+      "level": 20,
+      "name": "Signature Spells",
+      "text": "Two 3rd-level spells are always prepared, and each can be cast once without a slot per Short Rest."
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+<meta charset="utf-8">
+<title>Wizard's Spell Tome</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="styles.css">
+
+<main class="stage">
+  <div class="book-wrap" id="wrap">
+    <nav class="tabs" id="tabs" aria-label="Spell levels"></nav>
+    <div class="book" id="book" aria-live="polite">
+      <div class="boards"></div>
+      <div id="flip"></div>
+    </div>
+  </div>
+</main>
+
+<!-- the desktop app injects its globals into this page; harmless 404 in a plain browser -->
+<script src="neutralino.js"></script>
+<script src="vendor/jquery.min.js"></script>
+<script src="vendor/turn.js"></script>
+<script src="app.js"></script>

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://raw.githubusercontent.com/neutralinojs/neutralinojs/main/schemas/neutralino.config.schema.json",
+  "applicationId": "local.spelltome",
+  "version": "1.0.0",
+  "defaultMode": "window",
+  "documentRoot": "/www/",
+  "url": "/",
+  "enableServer": true,
+  "enableNativeAPI": true,
+  "tokenSecurity": "one-time",
+  "port": 47219,
+  "logging": {
+    "enabled": false
+  },
+  "modes": {
+    "window": {
+      "title": "Liber Arcanorum",
+      "width": 1160,
+      "height": 740,
+      "center": true,
+      "enableInspector": false,
+      "exitProcessOnClose": true,
+      "borderless": true,
+      "transparent": true,
+      "resizable": false
+    }
+  },
+  "cli": {
+    "binaryName": "spell-tome",
+    "resourcesPath": "/www/",
+    "distributionPath": "/dist",
+    "binaryVersion": "6.10.0",
+    "clientLibrary": "/www/neutralino.js",
+    "clientVersion": "6.10.0"
+  },
+  "nativeAllowList": [
+    "app.exit",
+    "window.*"
+  ],
+  "injectGlobals": true
+}
